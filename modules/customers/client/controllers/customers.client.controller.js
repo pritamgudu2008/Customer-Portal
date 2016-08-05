@@ -129,52 +129,6 @@ customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Noti
               $scope.error = errorResponse.data.message;
           });
       };
-
-      $scope.today = function() {
-        this.dateOfBirth = new Date();
-      };
-      $scope.today();
-
-      function getDayClass(data) {
-        var date = data.date,
-          mode = data.mode;
-        if (mode === 'day') {
-          var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-          for (var i = 0; i < $scope.events.length; i++) {
-            var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-            if (dayToCheck === currentDay) {
-              return $scope.events[i].status;
-            }
-          }
-        }
-
-        return '';
-      }
-
-      $scope.inlineOptions = {
-        customClass: getDayClass,
-        showWeeks: true
-      };
-
-      $scope.dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date(),
-        startingDay: 1
-      };
-
-      $scope.open1 = function() {
-        this.popup1.opened = true;
-      };
-
-      $scope.format = 'dd-MMMM-yyyy';
-      
-
-      $scope.popup1 = {
-        opened: false
-      };
-
     }
 ]);
 
