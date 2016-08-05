@@ -12,14 +12,14 @@ angular.module('customers').run(['Menus',
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'customers', {
-      title: 'Show Ccustomers',
+      title: 'Show Customers',
       state: 'customers.list'
     });
 
-    // Add the dropdown create item
+    /*// Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'customers', {
       title: 'Add Customers',
       state: 'customers.create'
-    });
+    });*/
   }
 ]);

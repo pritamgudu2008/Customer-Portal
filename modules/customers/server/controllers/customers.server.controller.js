@@ -39,9 +39,19 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var customer = req.customer;
 
-  customer.title = req.body.title;
-  customer.content = req.body.content;
-
+  customer.firstName = req.body.firstName;
+  customer.middleName = req.body.middleName;
+  customer.lastName = req.body.lastName;
+  customer.gender = req.body.gender;
+  customer.dateOfBirth = req.body.dateOfBirth;
+  customer.phoneNumber = req.body.phoneNumber;
+  customer.emailId = req.body.emailId;
+  customer.maritalStatus = req.body.maritalStatus;
+  customer.language = req.body.language;
+  customer.address = req.body.address;
+  customer.postalCode = req.body.postalCode;
+  customer.policyNumber = req.body.policyNumber;
+  
   customer.save(function (err) {
     if (err) {
       return res.status(400).send({

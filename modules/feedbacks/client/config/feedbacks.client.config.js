@@ -14,6 +14,7 @@ angular.module('feedbacks').run(['Menus',
     Menus.addSubMenuItem('topbar', 'feedbacks', {
       title: 'Show Feedbacks',
       state: 'feedbacks.list'
+
     });
 
     // Add the dropdown create item

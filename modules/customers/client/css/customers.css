@@ -1,3 +1,16 @@
 .cust-profile{
 	font-size: 220px;
 }
+
+.cust-list{
+	font-size: 150px;
+}
+
+.text-pink{
+	color: hotpink;
+}
+
+.extra-space{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}

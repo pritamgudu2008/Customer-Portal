@@ -1,88 +1,214 @@
 'use strict';
 
 // Customers controller
-angular.module('customers').controller('CustomersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Customers',
-  function ($scope, $stateParams, $location, Authentication, Customers) {
-    $scope.authentication = Authentication;
 
-    // Create new Customer
-    $scope.create = function () {
-      // Create new Customer object
-      var customer = new Customers({
-        firstName: this.firstName,
-        middleName: this.middleName,
-        lastName: this.lastName,
-        gender: this.gender,
-        dateOfBirth: this.dateOfBirth,
-        phoneNumber: this.phoneNumber,
-        emailId: this.emailId,
-        maritalStatus: this.maritalStatus,
-        language: this.language,
-        address: this.address,
-        postalCode: this.postalCode,
-        policyNumber: this.policyNumber
-      });
+//noinspection JSAnnotator
+var customerApp = angular.module('customers');
 
-      // Redirect after save
-      customer.$save(function (response) {
-        $location.path('customers/' + response._id);
+customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log',
+  function ($scope, $stateParams, Authentication, Customers, $modal, $log) {
 
-        // Clear form fields
-        $scope.firstName = '';
-        $scope.middleName = '';
-        $scope.lastName = '';
-        $scope.gender = '';
-        $scope.dateOfBirth = '';
-        $scope.phoneNumber = '';
-        $scope.emailId = '';
-        $scope.maritalStatus = '';
-        $scope.language = '';
-        $scope.address = '';
-        $scope.postalCode = '';
-        $scope.policyNumber = '';
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
 
-    // Remove existing Customer
-    $scope.remove = function (customer) {
-      if (customer) {
-        customer.$remove();
+      this.authentication = Authentication;
+    
+      // Find a list of Customers
+      this.customers = Customers.query();
 
-        for (var i in $scope.customers) {
-          if ($scope.customers[i] === customer) {
-            $scope.customers.splice(i, 1);
+      //Model Window to create a single customer
+      this.animationsEnabled = true;
+
+      this.modalCreate = function (size) {
+
+          var modalInstance = $modal.open({
+              animation: $scope.animationsEnabled,
+              templateUrl: 'modules/customers/views/create-customer.client.view.html',
+              controller: function ($scope, $modalInstance) {
+
+                  $scope.ok = function (isValid) {
+                      $modalInstance.close();
+                  };
+
+                  $scope.cancel = function () {
+                      $modalInstance.dismiss('cancel');
+                  };
+              },
+              size: size
+          });
+
+          modalInstance.result.then(function (selectedItem) {
+          }, function () {
+              $log.info('Modal dismissed at: ' + new Date());
+          });
+      };
+
+      this.toggleAnimation = function () {
+          $scope.animationsEnabled = !$scope.animationsEnabled;
+      };
+
+      //Model Window to update a single customer
+
+      this.modalUpdate = function (size, selectedCustomer) {
+
+        var modalInstance = $modal.open({
+          animation: $scope.animationsEnabled,
+          templateUrl: 'modules/customers/views/edit-customer.client.view.html',
+          controller: function ($scope, $modalInstance, customer) {
+              $scope.customer = customer;
+
+              $scope.ok = function (isValid) {
+                  $modalInstance.close($scope.customer);
+              };
+
+              $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+              };
+          },
+          size: size,
+          resolve: {
+            customer: function () {
+              return selectedCustomer;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.selected = selectedItem;
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+
+      // Remove existing Customer
+      this.remove = function (customer) {
+          if (customer) {
+              customer.$remove();
+
+              for (var i in this.customers) {
+                  if (this.customers[i] === customer) {
+                      this.customers.splice(i, 1);
+                  }
+              }
+          } else {
+              this.customer.$remove(function () {
+              });
+          }
+      };
+
+    }
+]);
+
+
+customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Notify',
+  function ($scope, Customers, Notify) {
+
+
+      // Create new Customer
+      this.create = function () {
+          // Create new Customer object
+          var customer = new Customers({
+              firstName: this.firstName,
+              middleName: this.middleName,
+              lastName: this.lastName,
+              gender: this.gender,
+              dateOfBirth: this.dateOfBirth,
+              phoneNumber: this.phoneNumber,
+              emailId: this.emailId,
+              maritalStatus: this.maritalStatus,
+              language: this.language,
+              address: this.address,
+              postalCode: this.postalCode,
+              policyNumber: this.policyNumber
+          });
+
+          // Redirect after save
+          customer.$save(function (response) {
+
+              Notify.sendMsg('NewCustomer', {'id':response._id});
+          }, function (errorResponse) {
+              $scope.error = errorResponse.data.message;
+          });
+      };
+
+      $scope.today = function() {
+        this.dateOfBirth = new Date();
+      };
+      $scope.today();
+
+      function getDayClass(data) {
+        var date = data.date,
+          mode = data.mode;
+        if (mode === 'day') {
+          var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+          for (var i = 0; i < $scope.events.length; i++) {
+            var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+            if (dayToCheck === currentDay) {
+              return $scope.events[i].status;
+            }
           }
         }
-      } else {
-        $scope.customer.$remove(function () {
-          $location.path('customers');
-        });
+
+        return '';
       }
-    };
 
-    // Update existing Customer
-    $scope.update = function () {
-      var customer = $scope.customer;
+      $scope.inlineOptions = {
+        customClass: getDayClass,
+        showWeeks: true
+      };
 
-      customer.$update(function () {
-        $location.path('customers/' + customer._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        maxDate: new Date(),
+        startingDay: 1
+      };
 
-    // Find a list of Customers
-    $scope.find = function () {
-      $scope.customers = Customers.query();
-    };
+      $scope.open1 = function() {
+        this.popup1.opened = true;
+      };
 
-    // Find existing Customer
-    $scope.findOne = function () {
-      $scope.customer = Customers.get({
-        customerId: $stateParams.customerId
-      });
-    };
-  }
+      $scope.format = 'dd-MMMM-yyyy';
+      
+
+      $scope.popup1 = {
+        opened: false
+      };
+
+    }
 ]);
+
+
+customerApp.controller('CustomersUpdateController', ['$scope', 'Customers',
+  function ($scope, Customers) {
+
+      // Update existing Customer
+      this.update = function (updatedCustomer) {
+          var customer = updatedCustomer;
+
+          customer.$update(function () {
+              console.log('Now calling the Update Method');
+          }, function (errorResponse) {
+              $scope.error = errorResponse.data.message;
+          });
+      };
+
+    }
+]);
+
+customerApp.directive('customerList', ['Customers', 'Notify', function (Customers, Notify) {
+    return{
+        restrict:'E',
+        transclude:'true',
+        templateUrl:'modules/customers/views/view-customer.client.view.html',
+        link: function (scope, element, attrs) {
+
+            //When a new customer is added,update the customer list
+
+            Notify.getMsg('NewCustomer', function (event, data) {
+                scope.customersCtrl.customers = Customers.query();
+            });
+        }
+    };
+}]);
+
