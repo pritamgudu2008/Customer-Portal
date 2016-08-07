@@ -53,7 +53,7 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
           animation: $scope.animationsEnabled,
           templateUrl: 'modules/customers/views/edit-customer.client.view.html',
           controller: function ($scope, $modalInstance, customer) {
-              $scope.customer = customer;
+              $scope.customer = angular.copy(customer);
 
               $scope.ok = function (isValid) {
                   $modalInstance.close($scope.customer);
@@ -133,14 +133,15 @@ customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Noti
 ]);
 
 
-customerApp.controller('CustomersUpdateController', ['$scope', 'Customers',
-  function ($scope, Customers) {
+customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Notify',
+  function ($scope, Customers, Notify) {
 
       // Update existing Customer
       this.update = function (updatedCustomer) {
-          var customer = updatedCustomer;
+          var customer = angular.copy(updatedCustomer);
 
-          customer.$update(function () {
+          customer.$update(function (response) {
+              Notify.sendMsg('UpdateCustomer', {'id':response._id});
               console.log('Now calling the Update Method');
           }, function (errorResponse) {
               $scope.error = errorResponse.data.message;
@@ -160,6 +161,9 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
             //When a new customer is added,update the customer list
 
             Notify.getMsg('NewCustomer', function (event, data) {
+                scope.customersCtrl.customers = Customers.query();
+            });
+            Notify.getMsg('UpdateCustomer', function (event, data) {
                 scope.customersCtrl.customers = Customers.query();
             });
         }

@@ -2,7 +2,7 @@
   <div class="col-xs-6 col-sm-4 col-md-3 extra-space" data-ng-repeat="customer in customersCtrl.customers | filter:searchText">
     <a ng-click="customersCtrl.modalUpdate('lg', customer)" class="list-group-item">
         <span class="pull-right">
-              <button class="btn btn-default btn-sm" ng-click="customersCtrl.remove(customer)">
+              <button class="btn btn-default btn-sm" ng-click="customersCtrl.remove(customer)" ng-disabled="customersCtrl.authentication.user.displayName !== customer.user.displayName">
                 <i class="glyphicon glyphicon-trash"></i>
               </button>
       </span>
@@ -15,8 +15,8 @@
           <small class="list-group-item-text text-muted">
             On
             <span data-ng-bind="customer.created | date:'mediumDate'"></span>
-            <!-- by
-            <span data-ng-bind="customer.user.displayName"></span> -->
+            by
+            <span data-ng-bind="customer.user.displayName"></span>
           </small>
         </div>
       </div>
