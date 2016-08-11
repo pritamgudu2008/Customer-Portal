@@ -552,14 +552,43 @@ angular.module('customers').config(['$stateProvider',
 //noinspection JSAnnotator
 var customerApp = angular.module('customers');
 
-customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log',
-  function ($scope, $stateParams, Authentication, Customers, $modal, $log) {
+customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log', '$filter',
+  function ($scope, $stateParams, Authentication, Customers, $modal, $log, $filter) {
 
 
       this.authentication = Authentication;
     
       // Find a list of Customers
       this.customers = Customers.query();
+      this.pager = function(customers){
+
+          $scope.customerrecords = customers;
+
+          $scope.buildPager = function () {
+          $scope.pagedItems = [];
+          $scope.itemsPerPage = 6;
+          $scope.currentPage = 1;
+          $scope.figureOutItemsToDisplay();
+        };
+
+        $scope.figureOutItemsToDisplay = function () {
+          $scope.filteredItems = $filter('filter')($scope.customerrecords, {
+            $: $scope.searchText
+          });
+          $scope.filterLength = $scope.filteredItems.length;
+          var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+          var end = begin + $scope.itemsPerPage;
+          $scope.pagedItems = $scope.filteredItems.slice(begin, end);
+        };
+
+        $scope.pageChanged = function () {
+          $scope.figureOutItemsToDisplay();
+        };
+
+        $scope.buildPager();
+      };
+
+      //this.pager(this.customers);
 
       //Model Window to create a single customer
       this.animationsEnabled = true;
@@ -694,7 +723,9 @@ customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Not
               $scope.error = errorResponse.data.message;
           });
       };
-
+      this.reloadPage = function(){
+        window.location.reload();
+      };
     }
 ]);
 
@@ -708,9 +739,11 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
             //When a new customer is added,update the customer list
 
             Notify.getMsg('NewCustomer', function (event, data) {
+                //scope.customersCtrl.pager(Customers.query());
                 scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('UpdateCustomer', function (event, data) {
+                //scope.customersCtrl.pager(Customers.query());
                 scope.customersCtrl.customers = Customers.query();
             });
         }
@@ -1067,7 +1100,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
     $scope.buildPager = function () {
       $scope.pagedItems = [];
-      $scope.itemsPerPage = 15;
+      $scope.itemsPerPage = 10;
       $scope.currentPage = 1;
       $scope.figureOutItemsToDisplay();
     };
