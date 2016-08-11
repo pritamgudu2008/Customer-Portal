@@ -62,7 +62,7 @@
                 <div class="form-group">
                   <label class="control-label" for="phoneNumber">Phone Number</label>
                   <div class="controls">
-                    <input name="phoneNumber" type="text" data-ng-model="customer.phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number">
+                    <input name="phoneNumber" type="text" data-ng-model="customer.phoneNumber" id="phoneNumber" class="form-control" ui-mask="(999) 999-9999" placeholder="(___) ___-____">
                   </div>
                 </div>
                 <div class="form-group">
@@ -83,7 +83,7 @@
                   <label class="control-label">Date Of Birth</label>
                   <div class="dropdown">
                     <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                      <div class="input-group"><input type="text" class="form-control" data-ng-model="customer.dateOfBirth" placeholder="Date Of Birth"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      <div class="input-group"><input type="text" ui-mask="99-99-9999" class="form-control" data-ng-model="customer.dateOfBirth" placeholder="DD-MM-YYYY"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </a>
                   </div>
@@ -97,7 +97,7 @@
                 <div class="form-group">
                   <label class="control-label" for="postalCode">Postal Code*</label>
                   <div class="controls">
-                    <input name="postalCode" type="text" data-ng-model="customer.postalCode" id="postalCode" class="form-control" placeholder="Postal Code">
+                    <input name="postalCode" type="text" ui-mask="A9A 9A9" data-ng-model="customer.postalCode" id="postalCode" class="form-control textUpper">
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
                 <div class="form-group">
                   <label class="control-label" for="policyNumber">Policy Number*</label>
                   <div class="controls">
-                    <input name="policyNumber" type="text" data-ng-model="customer.policyNumber" id="policyNumber" class="form-control" placeholder="Policy Number">
+                    <input name="policyNumber" type="text" ui-mask="A9999999AAA" data-ng-model="customer.policyNumber" id="policyNumber" class="form-control textUpper">
                   </div>
                 </div>
               </div>

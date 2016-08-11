@@ -1,8 +1,13 @@
 <div class="list-group">
   <div class="col-xs-6 col-sm-4 col-md-3 extra-space" data-ng-repeat="customer in customersCtrl.customers | filter:searchText">
     <a ng-click="customersCtrl.modalUpdate('lg', customer)" class="list-group-item">
-        <span class="pull-right">
+        <span class="pull-right" ng-if="customersCtrl.authentication.user.roles.indexOf('admin') <= -1">
               <button class="btn btn-default btn-sm" ng-click="customersCtrl.remove(customer)" ng-disabled="customersCtrl.authentication.user.displayName !== customer.user.displayName">
+                <i class="glyphicon glyphicon-trash"></i>
+              </button>
+      </span>
+      <span class="pull-right" ng-if="customersCtrl.authentication.user.roles.indexOf('admin') > -1">
+              <button class="btn btn-default btn-sm" ng-click="customersCtrl.remove(customer)">
                 <i class="glyphicon glyphicon-trash"></i>
               </button>
       </span>
@@ -14,7 +19,7 @@
           <h4>{{customer.firstName}} {{customer.lastName}}</h4>
           <small class="list-group-item-text text-muted">
             On
-            <span data-ng-bind="customer.created | date:'mediumDate'"></span>
+            <span data-ng-bind="customer.created | date:'MMM d'"></span>
             by
             <span data-ng-bind="customer.user.displayName"></span>
           </small>
@@ -23,6 +28,6 @@
     </a>
   </div>
 </div>
-<div class="alert alert-warning text-center" data-ng-if="customers.$resolved && !customers.length">
+<div class="alert alert-warning text-center" data-ng-if="customersCtrl.customers.$resolved && !customersCtrl.customers.length">
   No customers yet, why don't you <a data-ui-sref="customers.create">add one</a>?
 </div>
