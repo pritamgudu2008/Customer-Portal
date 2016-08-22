@@ -1,0 +1,125 @@
+  <section data-ng-controller="CustomersUpdateController as customerUpCtrl">
+    <div class="modal-header">
+      <h3 class="modal-title">Customer Details:: {{customer.firstName}} {{customer.lastName}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="customerUpdateForm">
+          <fieldset disabled="true">
+            <div class="row">
+              <div class="form-group">
+                <div data-ng-show="error" class="text-center text-danger">
+                  <div class="alert alert-danger">
+                    <strong data-ng-bind="error"></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 text-center">
+                <i class="glyphicon glyphicon-user cust-profile" ng-class="{'text-primary':customer.gender=='Male','text-pink':customer.gender=='Female'}"></i>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="firstName">First Name :</label>
+                  <div class="controls">
+                    <input name="firstName" type="text" data-ng-model="customer.firstName" id="firstName" class="form-control" placeholder="First Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="middleName">Middle Name :</label>
+                  <div class="controls">
+                    <input name="middleName" type="text" data-ng-model="customer.middleName" id="middleName" class="form-control" placeholder="Middle Name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="lastName">Last Name :</label>
+                  <div class="controls">
+                    <input name="lastName" type="text" data-ng-model="customer.lastName" id="lastName" class="form-control" placeholder="Last Name">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label class="control-label">Gender :</label>
+                      <div class="controls">
+                        <input type="text" name="gender" data-ng-model="customer.gender" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label class="control-label">Marital Status :</label>
+                      <div class="controls">
+                        <input type="text" name="maritalStatus" data-ng-model="customer.maritalStatus" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-push-6">
+                <div class="form-group">
+                  <label class="control-label" for="phoneNumber">Phone Number :</label>
+                  <div class="controls">
+                    <input name="phoneNumber" type="text" data-ng-model="customer.phoneNumber" id="phoneNumber" class="form-control" ui-mask="(999) 999-9999" placeholder="(___) ___-____">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="emailId">Email Id :</label>
+                  <div class="controls">
+                    <input name="emailId" type="email" data-ng-model="customer.emailId" id="emailId" class="form-control" placeholder="Email Id">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="language">Language Known :</label>
+                  <div class="controls">
+                      <input name="language" type="text" data-ng-model="customer.language" id="language" class="form-control" placeholder="Language Known">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-sm-pull-6">
+                <div class="form-group">
+                  <label class="control-label">Date Of Birth :</label>
+                  <div class="controls">
+                      <input type="text" ui-mask="99-99-9999" class="form-control" data-ng-model="customer.dateOfBirth" placeholder="DD-MM-YYYY">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="address">Address :</label>
+                  <div class="controls">
+                    <input name="address" type="text" data-ng-model="customer.address" id="address" class="form-control" placeholder="Address">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="postalCode">Postal Code :</label>
+                  <div class="controls">
+                    <input name="postalCode" type="text" ui-mask="A9A 9A9" data-ng-model="customer.postalCode" id="postalCode" class="form-control textUpper">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="control-label" for="policyNumber">Policy Number :</label>
+                  <div class="controls">
+                    <input name="policyNumber" type="text" ui-mask="A9999999AAA" data-ng-model="customer.policyNumber" id="policyNumber" class="form-control textUpper">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-warning btn-lg" type="button" ng-click="cancel()">Close</button>
+   </div>
+
+
+
+
+   <!--
+
+     <div data-ng-show="error" class="text-danger">
+    <strong data-ng-bind="error"></strong>
+  </div> -->
+</section>

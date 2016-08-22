@@ -3,7 +3,7 @@
 }
 
 .cust-list{
-	font-size: 150px;
+	font-size: 130px;
 }
 
 .text-pink{
@@ -17,4 +17,20 @@
 
 .textUpper{
 	text-transform: uppercase;
+}
+
+ol.carousel-indicators {
+    left: 90%;
+}
+
+.navbar-inverse{
+	background:#ffc000 !important;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #313131 !important;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #313131 !important;
 }

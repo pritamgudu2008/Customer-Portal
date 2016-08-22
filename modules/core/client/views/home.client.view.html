@@ -1,18 +1,25 @@
 <section data-ng-controller="HomeController">
-  <div class="jumbotron text-center" style="height: 430px">
+  <div class="jumbotron text-center" style="height: 430px; padding: 5px !important;">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12">
-        <img alt="Insurance" style="height: 300px;width: 700px" class="img-responsive text-center" src="modules/core/img/brand/insurance-arrow.jpg" />
+      <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12" style="height: 390px">
+        <carousel interval="myInterval" no-wrap="noWrapSlides">
+          <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="height: 390px;width: 936px" class="img-responsive text-center">
+            <div class="carousel-caption">
+              <p>
+                <a class="btn btn-primary btn-sm" href="https://en.wikipedia.org/wiki/Insurance" target="_blank">Learn more</a>
+              </p>
+            </div>
+          </slide>
+        </carousel>
       </div>
+      <!-- <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12">
+        <img alt="Insurance" style="height: 300px;width: 700px" class="img-responsive text-center" src="modules/core/img/brand/insurance-arrow.jpg" />
+      </div> -->
     </div>
     <div class="row">
       <p class="lead">
         Insurance is a means of protection from financial loss.
-      </p>
-    </div>
-    <div class="row">
-      <p>
-        <a class="btn btn-primary btn-sm" href="https://en.wikipedia.org/wiki/Insurance" target="_blank">Learn more</a>
       </p>
     </div>
   </div>

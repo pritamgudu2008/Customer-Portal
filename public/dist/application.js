@@ -262,6 +262,34 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
   function ($scope, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+
+    $scope.myInterval = 8000;
+	$scope.noWrapSlides = false;
+	$scope.slides = [
+	    {
+	      image:'modules/core/img/brand/insurance-arrow.jpg',
+	      text:'Insurance is a means of protection from financial loss'
+	    },
+	    {
+	      image:'modules/core/img/brand/Insurance policy.jpg',
+	      text:'Image 2'
+	    },
+	    {
+	      image:'modules/core/img/brand/Health Insurance policy.jpg',
+	      text:'Image 3'
+	    },
+	    {
+	      image:'modules/core/img/brand/insurance.jpg',
+	      text:'Image 4'
+	    },
+	    {
+	      image:'modules/core/img/brand/Home Insurance.jpg',
+	      text:'Image 5'
+	    },
+	    {
+	      image:'modules/core/img/brand/Insurance1.jpg',
+	      text:'Image 6'
+	    }];
   }
 ]);
 
@@ -588,7 +616,7 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
         $scope.buildPager();
       };
 
-      //this.pager(this.customers);
+      this.pager(this.customers);
 
       //Model Window to create a single customer
       this.animationsEnabled = true;
@@ -628,6 +656,39 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
         var modalInstance = $modal.open({
           animation: $scope.animationsEnabled,
           templateUrl: 'modules/customers/views/edit-customer.client.view.html',
+          controller: ["$scope", "$modalInstance", "customer", function ($scope, $modalInstance, customer) {
+              $scope.customer = angular.copy(customer);
+
+              $scope.ok = function (isValid) {
+                  $modalInstance.close($scope.customer);
+              };
+
+              $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+              };
+          }],
+          size: size,
+          resolve: {
+            customer: function () {
+              return selectedCustomer;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          $scope.selected = selectedItem;
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+      //Model Window to View a single customer
+
+      this.modalView = function (size, selectedCustomer) {
+
+        var modalInstance = $modal.open({
+          animation: $scope.animationsEnabled,
+          templateUrl: 'modules/customers/views/customer-details.client.view.html',
           controller: ["$scope", "$modalInstance", "customer", function ($scope, $modalInstance, customer) {
               $scope.customer = angular.copy(customer);
 
@@ -705,6 +766,29 @@ customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Noti
               $scope.error = errorResponse.data.message;
           });
       };
+
+        $scope.today = function() {
+          this.dateOfBirth = new Date();
+        };
+        $scope.today();
+        $scope.maxDate = new Date();
+        $scope.minDate = new Date(1900, 1, 1);
+
+        $scope.open = function($event) {
+          $scope.status.opened = true;
+        };
+
+        $scope.dateOptions = {
+          formatYear: 'yy',
+          
+          startingDay: 1
+        };
+
+        $scope.format = 'dd-MMM-yyyy';
+
+        $scope.status = {
+          opened: false
+        };
     }
 ]);
 
@@ -739,12 +823,12 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
             //When a new customer is added,update the customer list
 
             Notify.getMsg('NewCustomer', function (event, data) {
-                //scope.customersCtrl.pager(Customers.query());
-                scope.customersCtrl.customers = Customers.query();
+                scope.customersCtrl.pager(Customers.query());
+                //scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('UpdateCustomer', function (event, data) {
-                //scope.customersCtrl.pager(Customers.query());
-                scope.customersCtrl.customers = Customers.query();
+                scope.customersCtrl.pager(Customers.query());
+                //scope.customersCtrl.customers = Customers.query();
             });
         }
     };
