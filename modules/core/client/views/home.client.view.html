@@ -23,6 +23,16 @@
       </p>
     </div>
   </div>
+  <div class="col-md-5 col-sm-6 pull-right" style="border-style: inset;border-color: burlywood;" data-ng-controller="FeedCtrl">
+          <h5 class="text-center" style="color: blue;text-decoration: underline;margin-bottom: -6px;"><strong>Latest News Feeds from CNN</strong></h5>
+          <carousel interval="myInterval" no-wrap="noWrapSlides">
+            <slide ng-repeat="feed in feeds" active="feed.active">
+              <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
+                    <p class="text-left">{{feed.contentSnippet}}</p>                    
+                    <span class="small">{{feed.publishedDate}}</span>
+            </slide>
+          </carousel>
+  </div>
   <div>
     <p><strong>General insurance or non-life insurance</strong> policies, including automobile and homeowners policies, provide payments depending on the loss from a particular financial event. General insurance is typically defined as any insurance that is not determined to be life insurance. It is called property and casualty insurance in the U.S. and Canada and Non-Life Insurance in Continental Europe.</p>
 

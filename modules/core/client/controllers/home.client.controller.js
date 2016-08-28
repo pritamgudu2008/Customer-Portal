@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication',
+var App = angular.module('core');
+App.controller('HomeController', ['$scope', 'Authentication',
   function ($scope, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
-    $scope.myInterval = 8000;
+    $scope.myInterval = 6000;
 	$scope.noWrapSlides = false;
 	$scope.slides = [
 	    {
@@ -34,3 +35,24 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	    }];
   }
 ]);
+
+App.controller('FeedCtrl', ['$scope','FeedService', function ($scope,Feed) {    
+    $scope.feedSrc='http://rss.cnn.com/rss/cnn_topstories.rss';
+    $scope.loadFeed=function(){        
+        Feed.parseFeed($scope.feedSrc).then(function(res){
+            //$scope.loadButonText=angular.element(e.target).text();
+            $scope.feeds=res.data.responseData.feed.entries;
+        });
+    };
+    $scope.loadFeed();
+    $scope.myInterval = 3000;
+    $scope.noWrapSlides = false;
+}]);
+
+App.factory('FeedService',['$http',function($http){
+    return {
+        parseFeed : function(url){
+            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+        }
+    };
+}]);

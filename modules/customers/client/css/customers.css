@@ -34,3 +34,20 @@ ol.carousel-indicators {
 .navbar-inverse .navbar-nav>li>a {
     color: #313131 !important;
 }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .active > a {
+	background-image: linear-gradient(to bottom, #ffc000 0%, #ffff99 100%);
+}
+
+.dropdown-menu {
+	background-color: #ffff99;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+	background-image: linear-gradient(to bottom, #58a9e2 0%, #80ccff 100%);
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #ffc61a;
+    background-image: none;
+}

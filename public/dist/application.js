@@ -258,12 +258,13 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication',
+var App = angular.module('core');
+App.controller('HomeController', ['$scope', 'Authentication',
   function ($scope, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
-    $scope.myInterval = 8000;
+    $scope.myInterval = 6000;
 	$scope.noWrapSlides = false;
 	$scope.slides = [
 	    {
@@ -292,6 +293,27 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	    }];
   }
 ]);
+
+App.controller('FeedCtrl', ['$scope','FeedService', function ($scope,Feed) {    
+    $scope.feedSrc='http://rss.cnn.com/rss/cnn_topstories.rss';
+    $scope.loadFeed=function(){        
+        Feed.parseFeed($scope.feedSrc).then(function(res){
+            //$scope.loadButonText=angular.element(e.target).text();
+            $scope.feeds=res.data.responseData.feed.entries;
+        });
+    };
+    $scope.loadFeed();
+    $scope.myInterval = 3000;
+    $scope.noWrapSlides = false;
+}]);
+
+App.factory('FeedService',['$http',function($http){
+    return {
+        parseFeed : function(url){
+            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+        }
+    };
+}]);
 
 'use strict';
 
@@ -580,8 +602,8 @@ angular.module('customers').config(['$stateProvider',
 //noinspection JSAnnotator
 var customerApp = angular.module('customers');
 
-customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log', '$filter',
-  function ($scope, $stateParams, Authentication, Customers, $modal, $log, $filter) {
+customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log', '$filter', 'Notify',
+  function ($scope, $stateParams, Authentication, Customers, $modal, $log, $filter, Notify) {
 
 
       this.authentication = Authentication;
@@ -725,11 +747,12 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
                   if (this.customers[i] === customer) {
                       this.customers.splice(i, 1);
                   }
+                  Notify.sendMsg('DeleteCustomer', {'id':customer._id});
               }
           } else {
               this.customer.$remove(function () {
               });
-          }
+          }  
       };
 
     }
@@ -767,10 +790,7 @@ customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Noti
           });
       };
 
-        $scope.today = function() {
-          this.dateOfBirth = new Date();
-        };
-        $scope.today();
+        
         $scope.maxDate = new Date();
         $scope.minDate = new Date(1900, 1, 1);
 
@@ -807,9 +827,26 @@ customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Not
               $scope.error = errorResponse.data.message;
           });
       };
-      this.reloadPage = function(){
-        window.location.reload();
-      };
+      
+      
+        $scope.maxDate = new Date();
+        $scope.minDate = new Date(1900, 1, 1);
+
+        $scope.open = function($event) {
+          $scope.status.opened = true;
+        };
+
+        $scope.dateOptions = {
+          formatYear: 'yy',
+          
+          startingDay: 1
+        };
+
+        $scope.format = 'dd-MMM-yyyy';
+
+        $scope.status = {
+          opened: false
+        };
     }
 ]);
 
@@ -827,6 +864,10 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
                 //scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('UpdateCustomer', function (event, data) {
+                scope.customersCtrl.pager(Customers.query());
+                //scope.customersCtrl.customers = Customers.query();
+            });
+            Notify.getMsg('DeleteCustomer', function (event, data) {
                 scope.customersCtrl.pager(Customers.query());
                 //scope.customersCtrl.customers = Customers.query();
             });

@@ -5,8 +5,8 @@
 //noinspection JSAnnotator
 var customerApp = angular.module('customers');
 
-customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log', '$filter',
-  function ($scope, $stateParams, Authentication, Customers, $modal, $log, $filter) {
+customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authentication', 'Customers', '$modal', '$log', '$filter', 'Notify',
+  function ($scope, $stateParams, Authentication, Customers, $modal, $log, $filter, Notify) {
 
 
       this.authentication = Authentication;
@@ -150,11 +150,12 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
                   if (this.customers[i] === customer) {
                       this.customers.splice(i, 1);
                   }
+                  Notify.sendMsg('DeleteCustomer', {'id':customer._id});
               }
           } else {
               this.customer.$remove(function () {
               });
-          }
+          }  
       };
 
     }
@@ -192,10 +193,7 @@ customerApp.controller('CustomersCreateController', ['$scope', 'Customers','Noti
           });
       };
 
-        $scope.today = function() {
-          this.dateOfBirth = new Date();
-        };
-        $scope.today();
+        
         $scope.maxDate = new Date();
         $scope.minDate = new Date(1900, 1, 1);
 
@@ -232,9 +230,26 @@ customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Not
               $scope.error = errorResponse.data.message;
           });
       };
-      this.reloadPage = function(){
-        window.location.reload();
-      };
+      
+      
+        $scope.maxDate = new Date();
+        $scope.minDate = new Date(1900, 1, 1);
+
+        $scope.open = function($event) {
+          $scope.status.opened = true;
+        };
+
+        $scope.dateOptions = {
+          formatYear: 'yy',
+          
+          startingDay: 1
+        };
+
+        $scope.format = 'dd-MMM-yyyy';
+
+        $scope.status = {
+          opened: false
+        };
     }
 ]);
 
@@ -252,6 +267,10 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
                 //scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('UpdateCustomer', function (event, data) {
+                scope.customersCtrl.pager(Customers.query());
+                //scope.customersCtrl.customers = Customers.query();
+            });
+            Notify.getMsg('DeleteCustomer', function (event, data) {
                 scope.customersCtrl.pager(Customers.query());
                 //scope.customersCtrl.customers = Customers.query();
             });
