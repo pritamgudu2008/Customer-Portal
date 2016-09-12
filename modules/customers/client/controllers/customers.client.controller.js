@@ -21,7 +21,7 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
 
           $scope.buildPager = function () {
           $scope.pagedItems = [];
-          $scope.itemsPerPage = 6;
+          $scope.itemsPerPage = 8;
           $scope.currentPage = 1;
           $scope.figureOutItemsToDisplay();
         };
