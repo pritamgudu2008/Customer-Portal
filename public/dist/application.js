@@ -610,9 +610,11 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
     
       // Find a list of Customers
       this.customers = Customers.query();
+    
       this.pager = function(customers){
-
-          $scope.customerrecords = customers;
+          
+         Customers.query(function (data) {
+            $scope.customerrecords = data;
 
           $scope.buildPager = function () {
           $scope.pagedItems = [];
@@ -634,8 +636,8 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
         $scope.pageChanged = function () {
           $scope.figureOutItemsToDisplay();
         };
-
-        $scope.buildPager();
+            $scope.buildPager();
+        });
       };
 
       this.pager(this.customers);
