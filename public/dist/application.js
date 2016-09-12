@@ -611,7 +611,7 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
       // Find a list of Customers
       this.customers = Customers.query();
     
-      this.pager = function(customers){
+      this.pager = function(){
           
          Customers.query(function (data) {
             $scope.customerrecords = data;
@@ -640,7 +640,7 @@ customerApp.controller('CustomersController', ['$scope', '$stateParams', 'Authen
         });
       };
 
-      this.pager(this.customers);
+      this.pager();
 
       //Model Window to create a single customer
       this.animationsEnabled = true;
@@ -862,15 +862,15 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
             //When a new customer is added,update the customer list
 
             Notify.getMsg('NewCustomer', function (event, data) {
-                scope.customersCtrl.pager(Customers.query());
+                scope.customersCtrl.pager();
                 //scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('UpdateCustomer', function (event, data) {
-                scope.customersCtrl.pager(Customers.query());
+                scope.customersCtrl.pager();
                 //scope.customersCtrl.customers = Customers.query();
             });
             Notify.getMsg('DeleteCustomer', function (event, data) {
-                scope.customersCtrl.pager(Customers.query());
+                scope.customersCtrl.pager();
                 //scope.customersCtrl.customers = Customers.query();
             });
         }
