@@ -82,12 +82,13 @@
             <div class="form-group">
               <label class="control-label">Date Of Birth</label>
               <p class="input-group">
-                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="customerCreateCtrl.dateOfBirth" is-open="status.opened" datepicker-options="dateOptions" close-text="Close" max-date="maxDate" min-date="minDate" placeholder="DD-MON-YYYY" init-date="false"/>
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="customerCreateCtrl.dateOfBirth" myformat is-open="status.opened" datepicker-options="dateOptions" close-text="Close" max-date="maxDate" min-date="minDate" placeholder="DD-MON-YYYY" init-date="false"/>
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </p>
             </div>
+            {{customerCreateCtrl.dateOfBirth}}
             <div class="form-group">
               <label class="control-label" for="address">Address</label>
               <div class="controls">

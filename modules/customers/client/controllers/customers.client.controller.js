@@ -233,7 +233,7 @@ customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Not
           });
       };
       
-      
+
         $scope.maxDate = new Date();
         $scope.minDate = new Date(1900, 1, 1);
 
@@ -252,6 +252,7 @@ customerApp.controller('CustomersUpdateController', ['$scope', 'Customers', 'Not
         $scope.status = {
           opened: false
         };
+
     }
 ]);
 
@@ -280,3 +281,14 @@ customerApp.directive('customerList', ['Customers', 'Notify', function (Customer
     };
 }]);
 
+
+customerApp.directive('myformat', function(dateFilter) {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(viewValue) {
+        return dateFilter(viewValue, 'dd-MMM-yyyy');
+      });
+    }
+  };
+});

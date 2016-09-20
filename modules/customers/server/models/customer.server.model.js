@@ -37,7 +37,7 @@ var CustomerSchema = new Schema({
     trim: true
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     default: '',
     trim: true
   },
