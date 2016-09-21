@@ -56,17 +56,17 @@ a:hover .header-profile-image {
 
 @font-face{
   font-family:Roboto;
-  src:url("../img/brand/fonts/roboto-light.eot?#iefix") format("embedded-opentype"),
-      url("../img/brand/fonts/roboto-light.ttf") format("truetype");
+  src:url("/dist/fonts/roboto-light.eot?#iefix") format("embedded-opentype"),
+      url("/dist/fonts/roboto-light.ttf") format("truetype");
   font-weight:200;
   font-style:normal
  }
 
  @font-face{
   font-family:Meteocons;
-  src:url("../img/brand/fonts/meteocons-webfont.eot?#iefix") format("embedded-opentype"),
-      url("../img/brand/fonts/meteocons-webfont.woff") format("woff"),
-      url("../img/brand/fonts/meteocons-webfont.ttf") format("truetype");
+  src:url("/dist/fonts/meteocons-webfont.eot?#iefix") format("embedded-opentype"),
+      url("/dist/fonts/meteocons-webfont.woff") format("woff"),
+      url("/dist/fonts/meteocons-webfont.ttf") format("truetype");
   font-weight:normal;
   font-style:normal;
   text-rendering:auto;
