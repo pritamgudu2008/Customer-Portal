@@ -56,16 +56,20 @@ a:hover .header-profile-image {
 
 @font-face{
   font-family:Roboto;
-  src:url("../fonts/roboto-light.eot");
-  src:url("../fonts/roboto-light.eot?#iefix") format("eot"),url("../fonts/roboto-light.woff2") format("woff2"),url("../fonts/roboto-light.woff") format("woff"),url("../fonts/roboto-light.ttf") format("truetype");
+  src:url("../fonts/roboto-light.eot?#iefix") format("embedded-opentype"),
+      url("../fonts/roboto-light.woff2") format("woff2"),
+      url("../fonts/roboto-light.woff") format("woff"),
+      url("../fonts/roboto-light.ttf") format("truetype");
   font-weight:200;
   font-style:normal
  }
 
  @font-face{
   font-family:Meteocons;
-  src:url("../fonts/meteocons.eot");
-  src:url("../fonts/meteocons.eot?#iefix") format("eot"),url("../fonts/meteocons.woff2") format("woff2"),url("../fonts/meteocons.woff") format("woff"),url("../fonts/meteocons.ttf") format("truetype");
+  src:url("../fonts/meteocons.eot?#iefix") format("embedded-opentype"),
+      url("../fonts/meteocons.woff2") format("woff2"),
+      url("../fonts/meteocons.woff") format("woff"),
+      url("../fonts/meteocons.ttf") format("truetype");
   font-weight:normal;
   font-style:normal;
   text-rendering:auto;
@@ -74,15 +78,26 @@ a:hover .header-profile-image {
 }
 
 .pull-down{
-  animation-name:pullDown;
   -webkit-animation-name:pullDown;
-  animation-duration:0.7s;
+  -moz-animation-name:pullDown;
+  -ms-animation-name:pullDown;
+  -o-animation-name:pullDown;
+  animation-name:pullDown;
   -webkit-animation-duration:0.7s;
-  animation-timing-function:ease-out;
+  -moz-animation-duration:0.7s;
+  -ms-animation-duration:0.7s;
+  -o-animation-duration:0.7s;
+  animation-duration:0.7s;
   -webkit-animation-timing-function:ease-out;
-  transform-origin:50% 0%;
-  -ms-transform-origin:50% 0%;
-  -webkit-transform-origin:50% 0%
+  -moz-animation-timing-function:ease-out;
+  -ms--animation-timing-function:ease-out;
+  -o-animation-timing-function:ease-out;
+  animation-timing-function:ease-out;
+  -ms-transform-origin:50%;
+  -moz-transform-origin:50%;
+  -o-transform-origin:50%;
+  -webkit-transform-origin:50%;
+  transform-origin:50%
 }
 
 @keyframes pullDown{
@@ -96,10 +111,12 @@ a:hover .header-profile-image {
 
 @-webkit-keyframes pullDown{
   0%{
-    -webkit-transform:scaleY(0.1)
+    -webkit-transform:scaleY(0.1);
+    transform:scaleY(0.1)
     }
   100%{
-    -webkit-transform:scaleY(1)
+    -webkit-transform:scaleY(1);
+    transform:scaleY(1)
     }
 }
 
@@ -270,7 +287,8 @@ font-size:.6em;
 }
 
 .location:focus{
-  outline:none
+  border: 1px solid grey;
+  outline:none;
 }
 
 .icon{

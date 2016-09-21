@@ -326,7 +326,7 @@ App.controller('MainController', ['$http', '$sce', '$log', '$scope', function($h
 	  // Declare all the private variables
       var vm = this;
       var _currentLocation = '';
-      var _apiKey = 'b9a01a5d129cfc5397a97c6f6bc24292';
+      var _apiKey = 'eac5c65ceea3e8f47ee0af02ea6a8d47';
       var _apiUrlCurrent = '';
       var _apiUrlDaily = '';
 
