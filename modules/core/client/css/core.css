@@ -56,20 +56,20 @@ a:hover .header-profile-image {
 
 @font-face{
   font-family:Roboto;
-  src:url("../fonts/roboto-light.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/roboto-light.woff2") format("woff2"),
-      url("../fonts/roboto-light.woff") format("woff"),
-      url("../fonts/roboto-light.ttf") format("truetype");
+  src:url("../img/brand/fonts/roboto-light.eot?#iefix") format("embedded-opentype"),
+      url("../img/brand/fonts/roboto-light.woff2") format("woff2"),
+      url("../img/brand/fonts/roboto-light.woff") format("woff"),
+      url("../img/brand/fonts/roboto-light.ttf") format("truetype");
   font-weight:200;
   font-style:normal
  }
 
  @font-face{
   font-family:Meteocons;
-  src:url("../fonts/meteocons.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/meteocons.woff2") format("woff2"),
-      url("../fonts/meteocons.woff") format("woff"),
-      url("../fonts/meteocons.ttf") format("truetype");
+  src:url("../img/brand/fonts/meteocons.eot?#iefix") format("embedded-opentype"),
+      url("../img/brand/fonts/meteocons.woff2") format("woff2"),
+      url("../img/brand/fonts/meteocons.woff") format("woff"),
+      url("../img/brand/fonts/meteocons.ttf") format("truetype");
   font-weight:normal;
   font-style:normal;
   text-rendering:auto;
