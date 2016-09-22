@@ -119,7 +119,7 @@ App.controller('MainController', ['$http', '$sce', '$log', '$scope', function($h
           vm.lon = position.coords.longitude;
 
           // Get an image from Google Maps
-          vm.locationImg = $sce.trustAsHtml('<img class="img" src="https://maps.googleapis.com/maps/api/staticmap?center=' + vm.lat + ',' + vm.lon + '&zoom=13&size=537x300&sensor=false" width="416" height="300" />');
+          vm.locationImg = $sce.trustAsHtml('<img class="img" src="https://maps.googleapis.com/maps/api/staticmap?center=' + vm.lat + ',' + vm.lon + '&zoom=13&size=537x300&sensor=false" width="349" height="300" />');
 
           // Set the OpenWeatherMap API URls (via a http to https proxy)
           _apiUrlCurrent = prepareUri('https://jsonp.afeld.me/?url=' + 'http://api.openweathermap.org/data/2.5/weather?lat=' + round(vm.lat) + '&lon=' + round(vm.lon) + '&APPID=' + _apiKey + '&callback=JSON_CALLBACK');

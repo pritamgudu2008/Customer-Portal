@@ -74,12 +74,12 @@ a:hover .header-profile-image {
   transform:translate(0, 0)
 }
 
-.pull-down{
-  -webkit-animation-name:pullDown;
-  -moz-animation-name:pullDown;
-  -ms-animation-name:pullDown;
-  -o-animation-name:pullDown;
-  animation-name:pullDown;
+.pull-right{
+  -webkit-animation-name:pullRight;
+  -moz-animation-name:pullRight;
+  -ms-animation-name:pullRight;
+  -o-animation-name:pullRight;
+  animation-name:pullRight;
   -webkit-animation-duration:0.7s;
   -moz-animation-duration:0.7s;
   -ms-animation-duration:0.7s;
@@ -97,7 +97,7 @@ a:hover .header-profile-image {
   transform-origin:50%
 }
 
-@keyframes pullDown{
+@keyframes pullRight{
   0%{
     transform:scaleY(0.1)
     }
@@ -106,7 +106,7 @@ a:hover .header-profile-image {
     }
 }
 
-@-webkit-keyframes pullDown{
+@-webkit-keyframes pullRight{
   0%{
     -webkit-transform:scaleY(0.1);
     transform:scaleY(0.1)
@@ -115,6 +115,10 @@ a:hover .header-profile-image {
     -webkit-transform:scaleY(1);
     transform:scaleY(1)
     }
+}
+
+.panel-body {
+    padding: 7px;
 }
 
 .buttonstyle {
@@ -149,7 +153,7 @@ transition:background-color .7s ease;
 color:#fff;
 border-radius:5px;
 box-shadow:0 0 15px rgba(0,0,0,0.1);
-max-width:30em;
+max-width:25em;
 position:relative;
 z-index:2;
 padding:0;
@@ -231,7 +235,7 @@ padding:.3em 1em 1em;
 }
 
 .temp-now {
-font-size:6em;
+font-size:4em;
 margin:0;
 }
 
@@ -241,7 +245,7 @@ vertical-align:.48em;
 }
 
 .temp-now1 {
-font-size:1.5em;
+font-size:1.1em;
 color:#0093ff;
 margin:0;
 }
@@ -251,7 +255,7 @@ font-size:.6em;
 }
 
 .weather-now{
-  font-size:2em;
+  font-size:1.5em;
   text-transform:capitalize;
   margin:0.1em 0 0.2em
 }
@@ -263,7 +267,7 @@ font-size:.6em;
 
 .location-panel{
   transition:background-color 0.7s ease;
-  font-size:1.1em;
+  font-size:1em;
   border-radius:5px
 }
 
@@ -293,7 +297,7 @@ font-size:.6em;
 }
 
 .icon.big{
-  font-size:8em;
+  font-size:6em;
   float:right
 }
 
@@ -312,8 +316,8 @@ font-size:.6em;
 }
 
 .bottom .icon{
-  font-size:4em;
-  margin-right:0.5em;
+  font-size:3em;
+  margin-right:0.1em;
   vertical-align:bottom;
   position:relative;
   top:-0.1em;
@@ -340,4 +344,16 @@ font-size:.6em;
 .info{
   font-size:0.8em;
   vertical-align:middle
+}
+
+.fontsize{
+  font-size: 15px;
+}
+
+accordion#panelClass {
+    position: fixed; z-index: 9999; background: rgba(56, 39, 39, 0); right: 0px; top: 54px;
+}
+
+p.temp-now1.ng-binding.ng-scope {
+    font-size: 17px;
 }
