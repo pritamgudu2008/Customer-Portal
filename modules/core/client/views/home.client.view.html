@@ -3,7 +3,7 @@
   <accordion id = "panelClass">
     <accordion-group is-open="status.open" style="max-width:32em;">
       <accordion-heading>
-       <div class="temp-now1"><div class=row style="margin-bottom: -4px;margin-left: -15px;margin-right: -15px;margin-top: -4px;"><div class=col-md-3>{{ main.kelvinToCelcius(main.dataCurrent.main.temp) }}<span style="vertical-align:0.40em;">&nbsp;&deg;C&nbsp;</span></div><div class="col-md-5"><div class="row fontsize"> {{main.searchBox}}</div><div class="row fontsize"> {{ main.dataCurrent.weather[0].description }}</div></div><div class="col-md-3"><span class="icon big1">{{ main.icon }}</span></div><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-up': !status.open}"></i></div></div>
+       <div class="temp-now1"><div class=row style="margin-bottom: -4px;margin-left: -15px;margin-right: -15px;margin-top: -4px;"><div class="col-sm-3 col-xs-3">{{ main.kelvinToCelcius(main.dataCurrent.main.temp) }}<span style="vertical-align:0.40em;">&nbsp;&deg;C&nbsp;</span></div><div class="col-sm-5 col-xs-5"><div class="row fontsize"> {{main.searchBox}}</div><div class="row fontsize"> {{ main.dataCurrent.weather[0].description }}</div></div><div class="col-sm-3 col-xs-3"><span class="icon big1">{{ main.icon }}</span></div><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-up': !status.open}"></i></div></div>
       </accordion-heading>
    <section id="colour" class="card" ng-class="main.cardColour" ng-cloak>
     <div class="top">

@@ -347,7 +347,9 @@ font-size:.6em;
 }
 
 .fontsize{
-  font-size: 15px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: capitalize;
 }
 
 accordion#panelClass {
