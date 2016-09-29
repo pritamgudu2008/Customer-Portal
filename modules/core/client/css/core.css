@@ -74,7 +74,7 @@ a:hover .header-profile-image {
   transform:translate(0, 0)
 }
 
-.pull-right{
+/* .pull-right{
   -webkit-animation-name:pullRight;
   -moz-animation-name:pullRight;
   -ms-animation-name:pullRight;
@@ -115,7 +115,7 @@ a:hover .header-profile-image {
     -webkit-transform:scaleY(1);
     transform:scaleY(1)
     }
-}
+} */
 
 .panel-body {
     padding: 7px;
@@ -312,7 +312,7 @@ font-size:.6em;
 }
 
 .bottom{
-  margin-top:0.9em
+  margin-top:0.7em
 }
 
 .bottom .icon{
@@ -333,12 +333,12 @@ font-size:.6em;
 
 .left1{
   float:left;
-  width:49.8%
+  width:52.8%
 }
 
 .right1{
   float:right;
-  width:49.8%
+  width:46.8%
 }
 
 .info{
@@ -349,7 +349,7 @@ font-size:.6em;
 .fontsize{
   font-size: 14px;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: capitalize
 }
 
 accordion#panelClass {
